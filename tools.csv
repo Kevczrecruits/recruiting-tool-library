@@ -13,3 +13,5 @@ LinkedIn,https://www.linkedin.com,Sourcing & Data,"Core sourcing network: profil
 GitHub,https://github.com,Productivity,"Host repos, trackers, and docs; home base for Kevin's projects.",Free,"code,docs,hosting",
 Notion,https://www.notion.so,Productivity,"Databases and wikis; home of the Hazuki Health hub and trackers.",Freemium,"wiki,database,notes",
 Granola,https://www.granola.ai,Productivity,"AI meeting notes that capture interview debriefs verbatim.",Freemium,"meetings,notes,interviews",
+v0,https://v0.dev,Build & Host,"Vercel's AI app builder — describe a UI, get deployable Next.js code.",Freemium,"ai,web-builder,nextjs",Kevin built his portfolio with it
+Vercel,https://vercel.com,Build & Host,"Host frontends for free — push to GitHub, get a live vercel.app URL.",Freemium,"hosting,deploy,frontend",

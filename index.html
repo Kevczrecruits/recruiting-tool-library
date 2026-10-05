@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>recruiting tool library</title>
+<meta name="description" content="a living index of free web software and ai tools for recruiting work" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#0B0F19;
+    --cyan:#00B4D8;
+    --glass:rgba(255,255,255,0.75);
+    --stroke:rgba(255,255,255,0.9);
+    --shadow:0 10px 30px rgba(0,0,0,0.03);
+    --muted:#5b6577;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    font-family:'Space Grotesk',system-ui,-apple-system,sans-serif;
+    color:var(--ink);
+    background:linear-gradient(180deg,#F4F8FA 0%,#EAF3F5 100%);
+    min-height:100vh;
+  }
+  /* faint grid mesh */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background-image:
+      linear-gradient(rgba(11,15,25,.05) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(11,15,25,.05) 1px,transparent 1px);
+    background-size:44px 44px;
+    -webkit-mask-image:radial-gradient(ellipse 100% 62% at 50% 0%,#000 25%,transparent 100%);
+            mask-image:radial-gradient(ellipse 100% 62% at 50% 0%,#000 25%,transparent 100%);
+  }
+  .wrap{position:relative;z-index:1}
+
+  /* floating pill nav */
+  .navpill{
+    position:sticky;top:14px;z-index:50;
+    max-width:1080px;margin:14px auto 0;padding:10px 14px;
+    display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+    background:var(--glass);
+    -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+    border:1px solid var(--stroke);border-radius:9999px;
+    box-shadow:var(--shadow);
+  }
+  .status{
+    display:flex;align-items:center;gap:8px;
+    font-family:'Space Mono',monospace;font-size:12px;font-weight:700;
+    background:var(--ink);color:#fff;border-radius:9999px;padding:9px 16px;
+    white-space:nowrap;
+  }
+  .whtdot{color:#fff;font-size:14px;line-height:1;flex:none}
+  .search{
+    flex:1;min-width:160px;
+    font-family:'Space Mono',monospace;font-size:13px;color:var(--ink);
+    background:rgba(11,15,25,.05);border:1px solid transparent;border-radius:9999px;
+    padding:10px 18px;outline:none;
+  }
+  .search:focus{border-color:rgba(0,180,216,.5);background:#fff}
+  .pillbtn{
+    font-family:'Space Mono',monospace;font-size:12px;font-weight:700;
+    border:1px solid rgba(11,15,25,.15);background:transparent;color:var(--ink);
+    border-radius:9999px;padding:10px 18px;cursor:pointer;white-space:nowrap;
+  }
+  .pillbtn.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .pillbtn:hover{transform:translateY(-1px)}
+
+  /* hero */
+  .hero{max-width:1080px;margin:64px auto 0;padding:0 26px}
+  .kicker{
+    font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted);display:flex;align-items:center;gap:10px;margin-bottom:14px;
+  }
+  .kicker::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan)}
+  .hero h1{
+    margin:0;font-weight:800;letter-spacing:-.02em;text-transform:lowercase;
+    font-size:clamp(46px,7.5vw,92px);line-height:.98;
+  }
+  .hero .sub{
+    font-family:'Space Mono',monospace;font-size:13px;color:var(--muted);margin:16px 0 0;max-width:560px;line-height:1.7;
+  }
+  .metrics{display:flex;gap:12px;flex-wrap:wrap;margin:26px 0 0}
+  .metric{
+    background:var(--glass);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+    border:1px solid var(--stroke);border-radius:9999px;box-shadow:var(--shadow);
+    padding:10px 20px;font-family:'Space Mono',monospace;font-size:12px;color:var(--muted);
+    display:flex;align-items:center;gap:10px;
+  }
+  .metric b{font-size:18px;color:var(--cyan);font-weight:700}
+
+  /* category pills */
+  .cats{max-width:1080px;margin:30px auto 0;padding:0 26px;display:flex;gap:10px;flex-wrap:wrap}
+  .cat{
+    font-family:'Space Mono',monospace;font-size:12px;font-weight:700;
+    background:var(--glass);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+    border:1px solid var(--stroke);border-radius:9999px;box-shadow:var(--shadow);
+    padding:9px 18px;cursor:pointer;color:var(--ink);
+  }
+  .cat.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+  /* cards */
+  .grid{
+    max-width:1080px;margin:26px auto 0;padding:0 26px 90px;
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px;
+  }
+  .card{
+    background:var(--glass);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+    border:1px solid var(--stroke);border-radius:24px;box-shadow:var(--shadow);
+    padding:24px;display:flex;flex-direction:column;gap:12px;
+    transition:transform .18s ease,box-shadow .18s ease;
+  }
+  .card:hover{transform:translateY(-4px);box-shadow:0 18px 44px rgba(0,0,0,.07)}
+  .card .catline{
+    font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--muted);display:flex;align-items:center;gap:9px;
+  }
+  .card .catline::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cyan);flex:none}
+  .card h2{margin:0;font-size:25px;font-weight:800;letter-spacing:-.01em;text-transform:lowercase}
+  .card p{margin:0;font-size:14px;line-height:1.55;color:#333d4f}
+  .card .foot{margin-top:auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding-top:6px}
+  .cost{
+    font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    padding:6px 13px;border-radius:9999px;background:rgba(11,15,25,.06);color:var(--ink);
+  }
+  .cost.free{background:rgba(0,180,216,.14);color:#04748c}
+  .open{
+    margin-left:auto;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;
+    background:var(--ink);color:#fff;border-radius:9999px;padding:9px 18px;text-decoration:none;
+  }
+  .open:hover{background:#1a2233}
+  .empty{
+    grid-column:1/-1;text-align:center;font-family:'Space Mono',monospace;font-size:13px;color:var(--muted);
+    background:var(--glass);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+    border:1px solid var(--stroke);border-radius:24px;box-shadow:var(--shadow);padding:44px 20px;
+  }
+
+  /* dark footer strip */
+  .footer{
+    background:var(--ink);color:#fff;border-radius:36px 36px 0 0;
+    padding:56px 26px 64px;text-align:center;
+  }
+  .footer h3{margin:0 0 10px;font-size:clamp(26px,4vw,40px);font-weight:800;letter-spacing:-.01em;text-transform:lowercase}
+  .footer p{font-family:'Space Mono',monospace;font-size:12px;color:rgba(255,255,255,.65);line-height:1.8;max-width:520px;margin:0 auto}
+  .footer p code{color:var(--cyan)}
+  .footer .row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:24px}
+  .footer .pillbtn{border-color:rgba(255,255,255,.25);color:#fff}
+  .footer .pillbtn.solid{background:#fff;color:var(--ink);border-color:#fff}
+
+  /* add-tool dialog */
+  dialog{
+    border:1px solid var(--stroke);border-radius:24px;padding:0;max-width:520px;width:calc(100vw - 40px);
+    background:rgba(255,255,255,.92);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);
+    box-shadow:0 30px 80px rgba(0,0,0,.18);color:var(--ink);
+  }
+  dialog::backdrop{background:rgba(11,15,25,.35);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+  .dlg{padding:30px}
+  .dlg h3{margin:0 0 4px;font-size:26px;font-weight:800;text-transform:lowercase;letter-spacing:-.01em}
+  .dlg .hint{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);margin:0 0 18px;line-height:1.6}
+  .dlg label{display:block;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:14px 0 6px}
+  .dlg input,.dlg select,.dlg textarea{
+    width:100%;font-family:'Space Grotesk',sans-serif;font-size:14px;color:var(--ink);
+    background:#fff;border:1px solid rgba(11,15,25,.15);border-radius:14px;padding:11px 14px;outline:none;
+  }
+  .dlg input:focus,.dlg select:focus,.dlg textarea:focus{border-color:var(--cyan)}
+  .dlg .actions{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+  .csvout{
+    display:none;margin-top:18px;background:var(--ink);color:#c9f5ff;border-radius:14px;
+    padding:16px;font-family:'Space Mono',monospace;font-size:11px;line-height:1.7;white-space:pre-wrap;word-break:break-all;
+  }
+  .csvout.show{display:block}
+  @media (max-width:640px){
+    .hero{margin-top:44px}
+    .navpill{border-radius:28px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="navpill">
+    <span class="status"><span class="whtdot">●</span><span id="statusText">tools loading</span></span>
+    <input class="search" id="search" type="search" placeholder="search tools…" autocomplete="off" />
+    <button class="pillbtn primary" id="addBtn" type="button">+ add tool</button>
+  </nav>
+
+  <header class="hero">
+    <div class="kicker">kevin's recruiting stack · living index</div>
+    <h1>recruiting tool library</h1>
+    <p class="sub">free web software + ai tools worth keeping — sourcing, outreach, research, decks, docs. search it, filter it, keep building it.</p>
+    <div class="metrics">
+      <span class="metric"><b id="mTools">–</b> tools</span>
+      <span class="metric"><b id="mCats">–</b> categories</span>
+      <span class="metric"><b id="mFree">–</b> free to start</span>
+    </div>
+  </header>
+
+  <div class="cats" id="cats"></div>
+
+  <main class="grid" id="grid"></main>
+
+  <footer class="footer">
+    <h3>keep building it</h3>
+    <p>source of truth: <code>tools.csv</code> — one row per tool.<br/>
+    edit the csv, refresh this page. served over http(s) it reads the csv live;<br/>
+    opened from <code>file://</code> it uses the embedded copy.</p>
+    <div class="row">
+      <button class="pillbtn solid" id="exportBtn" type="button">export .csv</button>
+      <button class="pillbtn" id="addBtn2" type="button">+ add tool</button>
+    </div>
+  </footer>
+</div>
+
+<dialog id="addDialog">
+  <div class="dlg">
+    <h3>add a tool</h3>
+    <p class="hint">fills a card instantly + generates the csv row.<br/>paste that row into <b>tools.csv</b> so the source stays complete.</p>
+    <form id="addForm">
+      <label for="fName">name</label>
+      <input id="fName" required placeholder="e.g. teal" />
+      <label for="fUrl">url</label>
+      <input id="fUrl" required type="url" placeholder="https://…" />
+      <label for="fCat">category</label>
+      <input id="fCat" required list="catList" placeholder="e.g. Sourcing &amp; Data" />
+      <datalist id="catList"></datalist>
+      <label for="fDesc">use case · one terse line</label>
+      <input id="fDesc" required placeholder="what it's for, in a sentence" />
+      <label for="fCost">cost</label>
+      <select id="fCost">
+        <option>Free</option><option selected>Freemium</option><option>Paid</option>
+      </select>
+      <label for="fTags">tags · comma separated</label>
+      <input id="fTags" placeholder="sourcing, outreach" />
+      <label for="fNotes">notes</label>
+      <input id="fNotes" placeholder="optional" />
+      <div class="actions">
+        <button class="pillbtn primary" type="submit">add + generate csv</button>
+        <button class="pillbtn" type="button" id="copyRow" disabled>copy row</button>
+        <button class="pillbtn" type="button" id="closeDlg">close</button>
+      </div>
+      <div class="csvout" id="csvOut"></div>
+    </form>
+  </div>
+</dialog>
+
+<noscript><p style="text-align:center;font-family:monospace;padding:40px">this tracker needs javascript to render.</p></noscript>
+
+<script>
+"use strict";
+/* ------------------------------------------------------------------
+   TOOL_DATA — embedded fallback, mirrors tools.csv row-for-row.
+   When this page is served over http(s) it reads tools.csv live;
+   from file:// it uses this copy. Keep both in sync.
+------------------------------------------------------------------ */
+const TOOL_DATA = [
+  {name:"ChatGPT",url:"https://chat.openai.com",category:"AI Assistants",description:"Draft outreach, summarize profiles, build boolean strings, prep interview questions.",cost:"Freemium",tags:"writing,research,outreach",notes:""},
+  {name:"Claude",url:"https://claude.ai",category:"AI Assistants",description:"Long-context analysis and careful drafting for doc-heavy recruiting research.",cost:"Freemium",tags:"writing,research,analysis",notes:""},
+  {name:"Gemini",url:"https://gemini.google.com",category:"AI Assistants",description:"Google-grounded assistant for Gmail and Docs-aware drafting and quick research.",cost:"Free",tags:"writing,research,google",notes:""},
+  {name:"NotebookLM",url:"https://notebooklm.google.com",category:"Research & Notebooks",description:"Source-grounded research notebooks with citations; audio overviews of talent maps.",cost:"Free",tags:"research,citations,audio",notes:""},
+  {name:"Canva",url:"https://www.canva.com",category:"Design & Decks",description:"Quick one-pagers, visuals, and social graphics without a designer.",cost:"Freemium",tags:"design,graphics,one-pagers",notes:""},
+  {name:"Gamma",url:"https://gamma.app",category:"Design & Decks",description:"AI-generated slide decks and briefs from a prompt or an existing doc.",cost:"Freemium",tags:"decks,slides,briefs",notes:""},
+  {name:"Figma",url:"https://www.figma.com",category:"Design & Decks",description:"Collaborative design and whiteboarding for process maps and polished decks.",cost:"Freemium",tags:"design,whiteboard,collaboration",notes:""},
+  {name:"Smallpdf",url:"https://smallpdf.com",category:"PDF & Docs",description:"Compress, merge, split, and convert PDFs right in the browser.",cost:"Freemium",tags:"pdf,convert,compress",notes:""},
+  {name:"Clay",url:"https://clay.com",category:"Sourcing & Data",description:"Data enrichment and automated prospecting workflows across 100+ sources.",cost:"Freemium",tags:"enrichment,prospecting,automation",notes:""},
+  {name:"Crust Data",url:"https://crustdata.com",category:"Sourcing & Data",description:"Real-time company and people data APIs for talent mapping.",cost:"Freemium",tags:"api,talent-mapping,data",notes:""},
+  {name:"LinkedIn",url:"https://www.linkedin.com",category:"Sourcing & Data",description:"Core sourcing network: profiles, search, and outreach at scale.",cost:"Freemium",tags:"sourcing,profiles,outreach",notes:""},
+  {name:"GitHub",url:"https://github.com",category:"Productivity",description:"Host repos, trackers, and docs; home base for Kevin's projects.",cost:"Free",tags:"code,docs,hosting",notes:""},
+  {name:"Notion",url:"https://www.notion.so",category:"Productivity",description:"Databases and wikis; home of the Hazuki Health hub and trackers.",cost:"Freemium",tags:"wiki,database,notes",notes:""},
+  {name:"Granola",url:"https://www.granola.ai",category:"Productivity",description:"AI meeting notes that capture interview debriefs verbatim.",cost:"Freemium",tags:"meetings,notes,interviews",notes:""}
+];
+
+let tools = [];
+let activeCat = "all";
+let query = "";
+
+function parseCSV(text){
+  const rows=[]; let field="", row=[], inQ=false;
+  for(let i=0;i<text.length;i++){
+    const c=text[i];
+    if(inQ){
+      if(c==='"'){ if(text[i+1]==='"'){field+='"';i++;} else inQ=false; }
+      else field+=c;
+    }else{
+      if(c==='"') inQ=true;
+      else if(c===','){row.push(field);field="";}
+      else if(c==='\n'||c==='\r'){
+        if(c==='\r'&&text[i+1]==='\n')i++;
+        row.push(field);field="";
+        if(row.length>1||row[0]!=="")rows.push(row);
+        row=[];
+      }
+      else field+=c;
+    }
+  }
+  row.push(field);
+  if(row.length>1||row[0]!=="")rows.push(row);
+  if(!rows.length)return [];
+  const head=rows[0].map(h=>h.trim().toLowerCase());
+  return rows.slice(1)
+    .filter(r=>r.some(v=>v.trim()!==""))
+    .map(r=>{const o={};head.forEach((h,j)=>o[h]=(r[j]||"").trim());return o;});
+}
+
+function csvEscape(v){
+  v=String(v??"");
+  return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v;
+}
+function toCSVRow(t){
+  return ["name","url","category","description","cost","tags","notes"]
+    .map(k=>csvEscape(t[k])).join(",");
+}
+function toCSV(list){
+  return "name,url,category,description,cost,tags,notes\n"+list.map(toCSVRow).join("\n")+"\n";
+}
+
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+
+function filtered(){
+  const q=query.toLowerCase();
+  return tools.filter(t=>{
+    if(activeCat!=="all"&&t.category!==activeCat)return false;
+    if(!q)return true;
+    return (t.name+" "+t.description+" "+t.tags+" "+t.category).toLowerCase().includes(q);
+  });
+}
+
+function render(){
+  const grid=document.getElementById("grid");
+  const list=filtered();
+  if(!list.length){
+    grid.innerHTML='<div class="empty">no tools match — try another search.</div>';
+  }else{
+    grid.innerHTML=list.map(t=>`
+      <article class="card">
+        <div class="catline">${esc(t.category)}</div>
+        <h2>${esc(t.name)}</h2>
+        <p>${esc(t.description)}</p>
+        <div class="foot">
+          <span class="cost ${String(t.cost).toLowerCase()}">${esc(t.cost)}</span>
+          <a class="open" href="${esc(t.url)}" target="_blank" rel="noopener">open ↗</a>
+        </div>
+      </article>`).join("");
+  }
+  const cats=[...new Set(tools.map(t=>t.category))];
+  document.getElementById("mTools").textContent=tools.length;
+  document.getElementById("mCats").textContent=cats.length;
+  document.getElementById("mFree").textContent=tools.filter(t=>/free/i.test(t.cost)).length;
+  document.getElementById("statusText").textContent="tools loaded · "+tools.length;
+  renderCats(cats);
+}
+
+function renderCats(cats){
+  const el=document.getElementById("cats");
+  const all=["all",...cats];
+  el.innerHTML=all.map(c=>
+    `<button type="button" class="cat${c===activeCat?" active":""}" data-cat="${esc(c)}">${c==="all"?"all":esc(c)}</button>`
+  ).join("");
+  el.querySelectorAll(".cat").forEach(b=>b.addEventListener("click",()=>{
+    activeCat=b.dataset.cat;render();
+  }));
+  document.getElementById("catList").innerHTML=cats.map(c=>`<option value="${esc(c)}">`).join("");
+}
+
+async function load(){
+  try{
+    const r=await fetch("tools.csv",{cache:"no-store"});
+    if(r.ok){
+      const rows=parseCSV(await r.text());
+      if(rows.length){tools=rows;render();return;}
+    }
+  }catch(e){/* file:// or offline — use embedded copy */}
+  tools=TOOL_DATA.map(t=>({...t}));
+  render();
+}
+
+document.getElementById("search").addEventListener("input",e=>{query=e.target.value;render();});
+
+const dlg=document.getElementById("addDialog");
+document.getElementById("addBtn").addEventListener("click",()=>dlg.showModal());
+document.getElementById("addBtn2").addEventListener("click",()=>dlg.showModal());
+document.getElementById("closeDlg").addEventListener("click",()=>dlg.close());
+
+let lastRow="";
+document.getElementById("addForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const t={
+    name:document.getElementById("fName").value.trim(),
+    url:document.getElementById("fUrl").value.trim(),
+    category:document.getElementById("fCat").value.trim(),
+    description:document.getElementById("fDesc").value.trim(),
+    cost:document.getElementById("fCost").value,
+    tags:document.getElementById("fTags").value.trim(),
+    notes:document.getElementById("fNotes").value.trim()
+  };
+  tools.push(t);
+  lastRow=toCSVRow(t);
+  const out=document.getElementById("csvOut");
+  out.textContent="paste into tools.csv:\n\n"+lastRow;
+  out.classList.add("show");
+  document.getElementById("copyRow").disabled=false;
+  e.target.reset();
+  document.getElementById("fCost").value="Freemium";
+  render();
+});
+document.getElementById("copyRow").addEventListener("click",async e=>{
+  try{await navigator.clipboard.writeText(lastRow);e.target.textContent="copied ✓";setTimeout(()=>e.target.textContent="copy row",1500);}
+  catch(err){e.target.textContent="select + copy manually";}
+});
+
+document.getElementById("exportBtn").addEventListener("click",()=>{
+  const blob=new Blob([toCSV(tools)],{type:"text/csv"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download="tools.csv";
+  document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href),2000);
+});
+
+load();
+</script>
+</body>
+</html>

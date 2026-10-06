@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>recruiting tool library</title>
 <meta name="description" content="a living index of free web software and ai tools for recruiting work" />
+<meta name="color-scheme" content="light" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
@@ -17,6 +18,7 @@
     --shadow:0 10px 30px rgba(0,0,0,0.03);
     --muted:#5b6577;
   }
+  html{color-scheme:light}
   *{box-sizing:border-box}
   html{-webkit-text-size-adjust:100%}
   body{
@@ -120,6 +122,8 @@
     color:var(--muted);display:flex;align-items:center;gap:9px;
   }
   .card .catline::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--cyan);flex:none}
+  .chead{display:flex;gap:15px;align-items:center}
+  .ticon{width:52px;height:52px;flex:none;border-radius:16px;object-fit:contain;background:#fff;padding:7px;border:1px solid var(--stroke);box-shadow:0 6px 18px rgba(0,0,0,.06)}
   .card h2{margin:0;font-size:25px;font-weight:800;letter-spacing:-.01em;text-transform:lowercase}
   .card p{margin:0;font-size:14px;line-height:1.55;color:#333d4f}
   .card .foot{margin-top:auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding-top:6px}
@@ -237,6 +241,8 @@
       <input id="fTags" placeholder="sourcing, outreach" />
       <label for="fNotes">notes</label>
       <input id="fNotes" placeholder="optional" />
+      <label for="fIcon">icon file</label>
+      <input id="fIcon" placeholder="icons/acme.png" />
       <div class="actions">
         <button class="pillbtn primary" type="submit">add + generate csv</button>
         <button class="pillbtn" type="button" id="copyRow" disabled>copy row</button>
@@ -257,22 +263,24 @@
    from file:// it uses this copy. Keep both in sync.
 ------------------------------------------------------------------ */
 const TOOL_DATA = [
-  {name:"ChatGPT",url:"https://chat.openai.com",category:"AI Assistants",description:"Draft outreach, summarize profiles, build boolean strings, prep interview questions.",cost:"Freemium",tags:"writing,research,outreach",notes:""},
-  {name:"Claude",url:"https://claude.ai",category:"AI Assistants",description:"Long-context analysis and careful drafting for doc-heavy recruiting research.",cost:"Freemium",tags:"writing,research,analysis",notes:""},
-  {name:"Gemini",url:"https://gemini.google.com",category:"AI Assistants",description:"Google-grounded assistant for Gmail and Docs-aware drafting and quick research.",cost:"Free",tags:"writing,research,google",notes:""},
-  {name:"NotebookLM",url:"https://notebooklm.google.com",category:"Research & Notebooks",description:"Source-grounded research notebooks with citations; audio overviews of talent maps.",cost:"Free",tags:"research,citations,audio",notes:""},
-  {name:"Canva",url:"https://www.canva.com",category:"Design & Decks",description:"Quick one-pagers, visuals, and social graphics without a designer.",cost:"Freemium",tags:"design,graphics,one-pagers",notes:""},
-  {name:"Gamma",url:"https://gamma.app",category:"Design & Decks",description:"AI-generated slide decks and briefs from a prompt or an existing doc.",cost:"Freemium",tags:"decks,slides,briefs",notes:""},
-  {name:"Figma",url:"https://www.figma.com",category:"Design & Decks",description:"Collaborative design and whiteboarding for process maps and polished decks.",cost:"Freemium",tags:"design,whiteboard,collaboration",notes:""},
-  {name:"Smallpdf",url:"https://smallpdf.com",category:"PDF & Docs",description:"Compress, merge, split, and convert PDFs right in the browser.",cost:"Freemium",tags:"pdf,convert,compress",notes:""},
-  {name:"Clay",url:"https://clay.com",category:"Sourcing & Data",description:"Data enrichment and automated prospecting workflows across 100+ sources.",cost:"Freemium",tags:"enrichment,prospecting,automation",notes:""},
-  {name:"Crust Data",url:"https://crustdata.com",category:"Sourcing & Data",description:"Real-time company and people data APIs for talent mapping.",cost:"Freemium",tags:"api,talent-mapping,data",notes:""},
-  {name:"LinkedIn",url:"https://www.linkedin.com",category:"Sourcing & Data",description:"Core sourcing network: profiles, search, and outreach at scale.",cost:"Freemium",tags:"sourcing,profiles,outreach",notes:""},
-  {name:"GitHub",url:"https://github.com",category:"Productivity",description:"Host repos, trackers, and docs; home base for Kevin's projects.",cost:"Free",tags:"code,docs,hosting",notes:""},
-  {name:"Notion",url:"https://www.notion.so",category:"Productivity",description:"Databases and wikis; home of the Hazuki Health hub and trackers.",cost:"Freemium",tags:"wiki,database,notes",notes:""},
-  {name:"Granola",url:"https://www.granola.ai",category:"Productivity",description:"AI meeting notes that capture interview debriefs verbatim.",cost:"Freemium",tags:"meetings,notes,interviews",notes:""},
-  {name:"v0",url:"https://v0.dev",category:"Build & Host",description:"Vercel's AI app builder — describe a UI, get deployable Next.js code.",cost:"Freemium",tags:"ai,web-builder,nextjs",notes:"Kevin built his portfolio with it"},
-  {name:"Vercel",url:"https://vercel.com",category:"Build & Host",description:"Host frontends for free — push to GitHub, get a live vercel.app URL.",cost:"Freemium",tags:"hosting,deploy,frontend",notes:""}
+  {name:"ChatGPT",url:"https://chat.openai.com",category:"AI Assistants",description:"Draft outreach, summarize profiles, build boolean strings, prep interview questions.",cost:"Freemium",tags:"writing,research,outreach",notes:"",icon:"icons/chatgpt.png"},
+  {name:"Claude",url:"https://claude.ai",category:"AI Assistants",description:"Long-context analysis and careful drafting for doc-heavy recruiting research.",cost:"Freemium",tags:"writing,research,analysis",notes:"",icon:"icons/claude.png"},
+  {name:"Gemini",url:"https://gemini.google.com",category:"AI Assistants",description:"Google-grounded assistant for Gmail and Docs-aware drafting and quick research.",cost:"Free",tags:"writing,research,google",notes:"",icon:"icons/gemini.png"},
+  {name:"NotebookLM",url:"https://notebooklm.google.com",category:"Research & Notebooks",description:"Source-grounded research notebooks with citations; audio overviews of talent maps.",cost:"Free",tags:"research,citations,audio",notes:"",icon:"icons/notebooklm.png"},
+  {name:"Canva",url:"https://www.canva.com",category:"Design & Decks",description:"Quick one-pagers, visuals, and social graphics without a designer.",cost:"Freemium",tags:"design,graphics,one-pagers",notes:"",icon:"icons/canva.png"},
+  {name:"Gamma",url:"https://gamma.app",category:"Design & Decks",description:"AI-generated slide decks and briefs from a prompt or an existing doc.",cost:"Freemium",tags:"decks,slides,briefs",notes:"",icon:"icons/gamma.png"},
+  {name:"Figma",url:"https://www.figma.com",category:"Design & Decks",description:"Collaborative design and whiteboarding for process maps and polished decks.",cost:"Freemium",tags:"design,whiteboard,collaboration",notes:"",icon:"icons/figma.png"},
+  {name:"Smallpdf",url:"https://smallpdf.com",category:"PDF & Docs",description:"Compress, merge, split, and convert PDFs right in the browser.",cost:"Freemium",tags:"pdf,convert,compress",notes:"",icon:"icons/smallpdf.png"},
+  {name:"Clay",url:"https://clay.com",category:"Sourcing & Data",description:"Data enrichment and automated prospecting workflows across 100+ sources.",cost:"Freemium",tags:"enrichment,prospecting,automation",notes:"",icon:"icons/clay.png"},
+  {name:"Crust Data",url:"https://crustdata.com",category:"Sourcing & Data",description:"Real-time company and people data APIs for talent mapping.",cost:"Freemium",tags:"api,talent-mapping,data",notes:"",icon:"icons/crustdata.png"},
+  {name:"LinkedIn",url:"https://www.linkedin.com",category:"Sourcing & Data",description:"Core sourcing network: profiles, search, and outreach at scale.",cost:"Freemium",tags:"sourcing,profiles,outreach",notes:"",icon:"icons/linkedin.png"},
+  {name:"GitHub",url:"https://github.com",category:"Productivity",description:"Host repos, trackers, and docs; home base for Kevin's projects.",cost:"Free",tags:"code,docs,hosting",notes:"",icon:"icons/github.png"},
+  {name:"Notion",url:"https://www.notion.so",category:"Productivity",description:"Databases and wikis; home of the Hazuki Health hub and trackers.",cost:"Freemium",tags:"wiki,database,notes",notes:"",icon:"icons/notion.png"},
+  {name:"Granola",url:"https://www.granola.ai",category:"Productivity",description:"AI meeting notes that capture interview debriefs verbatim.",cost:"Freemium",tags:"meetings,notes,interviews",notes:"",icon:"icons/granola.png"},
+  {name:"v0",url:"https://v0.dev",category:"Build & Host",description:"Vercel's AI app builder — describe a UI, get deployable Next.js code.",cost:"Freemium",tags:"ai,web-builder,nextjs",notes:"Kevin built his portfolio with it",icon:"icons/v0.png"},
+  {name:"Vercel",url:"https://vercel.com",category:"Build & Host",description:"Host frontends for free — push to GitHub, get a live vercel.app URL.",cost:"Freemium",tags:"hosting,deploy,frontend",notes:"",icon:"icons/vercel.png"},
+  {name:"Perplexity",url:"https://www.perplexity.ai",category:"AI Assistants",description:"Answer engine with cited sources; quick research with receipts.",cost:"Freemium",tags:"research,answers,citations",notes:"",icon:"icons/perplexity.png"},
+  {name:"Google Scholar",url:"https://scholar.google.com",category:"Research & Notebooks",description:"Search scholarly papers and authors; map researchers by publication.",cost:"Free",tags:"research,papers,academia",notes:"",icon:"icons/googlescholar.png"}
 ];
 
 let tools = [];
@@ -312,11 +320,11 @@ function csvEscape(v){
   return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v;
 }
 function toCSVRow(t){
-  return ["name","url","category","description","cost","tags","notes"]
+  return ["name","url","category","description","cost","tags","notes","icon"]
     .map(k=>csvEscape(t[k])).join(",");
 }
 function toCSV(list){
-  return "name,url,category,description,cost,tags,notes\n"+list.map(toCSVRow).join("\n")+"\n";
+  return "name,url,category,description,cost,tags,notes,icon\n"+list.map(toCSVRow).join("\n")+"\n";
 }
 
 function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
@@ -338,8 +346,13 @@ function render(){
   }else{
     grid.innerHTML=list.map(t=>`
       <article class="card">
-        <div class="catline">${esc(t.category)}</div>
-        <h2>${esc(t.name)}</h2>
+        <div class="chead">
+          ${t.icon?`<img class="ticon" src="${esc(t.icon)}" alt="${esc(t.name)} logo" loading="lazy" onerror="this.style.display='none'"/>`:''}
+          <div>
+            <div class="catline">${esc(t.category)}</div>
+            <h2>${esc(t.name)}</h2>
+          </div>
+        </div>
         <p>${esc(t.description)}</p>
         <div class="foot">
           <span class="cost ${String(t.cost).toLowerCase()}">${esc(t.cost)}</span>
@@ -380,6 +393,10 @@ async function load(){
 }
 
 document.getElementById("search").addEventListener("input",e=>{query=e.target.value;render();});
+function slugify(s){return s.toLowerCase().replace(/[^a-z0-9]/g,"");}
+document.getElementById("fName").addEventListener("input",e=>{
+  document.getElementById("fIcon").value="icons/"+slugify(e.target.value)+".png";
+});
 
 const dlg=document.getElementById("addDialog");
 document.getElementById("addBtn").addEventListener("click",()=>dlg.showModal());
@@ -396,7 +413,8 @@ document.getElementById("addForm").addEventListener("submit",e=>{
     description:document.getElementById("fDesc").value.trim(),
     cost:document.getElementById("fCost").value,
     tags:document.getElementById("fTags").value.trim(),
-    notes:document.getElementById("fNotes").value.trim()
+    notes:document.getElementById("fNotes").value.trim(),
+    icon:document.getElementById("fIcon").value.trim()
   };
   tools.push(t);
   lastRow=toCSVRow(t);

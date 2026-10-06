@@ -17,3 +17,14 @@ v0,https://v0.dev,Build & Host,"Vercel's AI app builder — describe a UI, get d
 Vercel,https://vercel.com,Build & Host,"Host frontends for free — push to GitHub, get a live vercel.app URL.",Freemium,"hosting,deploy,frontend",,icons/vercel.png
 Perplexity,https://www.perplexity.ai,AI Assistants,Answer engine with cited sources; quick research with receipts.,Freemium,"research,answers,citations",,icons/perplexity.png
 Google Scholar,https://scholar.google.com,Research & Notebooks,Search scholarly papers and authors; map researchers by publication.,Free,"research,papers,academia",,icons/googlescholar.png
+Obsidian,https://obsidian.md,Productivity,Local-first markdown notes with backlinks; Kevin's vault lives here.,Free,"notes,markdown,vault",Kevin's Obsidian vault,icons/obsidian.png
+Otter.ai,https://otter.ai,Productivity,Live meeting transcription with summaries and action items.,Freemium,"meetings,transcription,notes",,icons/otterai.png
+Wispr Flow,https://wisprflow.ai,Productivity,AI voice dictation that types in any app; speech auto-cleaned.,Freemium,"dictation,voice,accessibility",,icons/wisprflow.png
+Fathom,https://fathom.video,Productivity,"AI meeting notes with recordings, summaries, and highlights.",Freemium,"meetings,notes,recording",,icons/fathom.png
+Google Calendar,https://calendar.google.com,Productivity,Scheduling and time management; Kevin's calendar is connected.,Free,"scheduling,calendar,google",,icons/googlecalendar.png
+n8n,https://n8n.io,Automation,Open-source workflow automation; connect apps and APIs visually.,Freemium,"automation,workflows,api",,icons/n8n.png
+Zapier,https://zapier.com,Automation,No-code automation across thousands of apps; kill repetitive work.,Freemium,"automation,workflows,no-code",,icons/zapier.png
+Hermes Agent,https://hermes-agent.nousresearch.com,AI Assistants,"Open-source autonomous AI agent by Nous Research; CLI, desktop, messaging.",Free,"ai-agent,open-source,automation",,icons/hermesagent.png
+OpenClaw,https://openclaw.ai,AI Assistants,Open-source AI agent framework for autonomous coding and tasks.,Free,"ai-agent,open-source,coding",,icons/openclaw.png
+Qdrant,https://qdrant.tech,Build & Host,Open-source vector database for AI search and RAG pipelines.,Freemium,"vector-db,rag,ai-infra",,icons/qdrant.png
+Apollo,https://www.apollo.io,Sourcing & Data,B2B prospecting with a huge contact database; sequences and enrichment.,Freemium,"prospecting,enrichment,outreach",,icons/apollo.png

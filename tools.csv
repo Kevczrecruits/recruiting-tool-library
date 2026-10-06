@@ -28,3 +28,13 @@ Hermes Agent,https://hermes-agent.nousresearch.com,AI Assistants,"Open-source au
 OpenClaw,https://openclaw.ai,AI Assistants,Open-source AI agent framework for autonomous coding and tasks.,Free,"ai-agent,open-source,coding",,icons/openclaw.png
 Qdrant,https://qdrant.tech,Build & Host,Open-source vector database for AI search and RAG pipelines.,Freemium,"vector-db,rag,ai-infra",,icons/qdrant.png
 Apollo,https://www.apollo.io,Sourcing & Data,B2B prospecting with a huge contact database; sequences and enrichment.,Freemium,"prospecting,enrichment,outreach",,icons/apollo.png
+Metaview,https://www.metaview.ai,Productivity,AI interview notes with summaries synced to your ATS.,Freemium,"meetings,interviews,notes",,icons/metaview.png
+Juicebox,https://www.juicebox.ai,Sourcing & Data,AI sourcing engine with recruiter-style natural search.,Freemium,"sourcing,ai-search,profiles",,icons/juicebox.png
+Ashby,https://www.ashbyhq.com,ATS & CRM,All-in-one ATS; Mecka runs on it.,Freemium,"ats,hiring",Mecka uses Ashby,icons/ashby.png
+Noon,https://noon.ai,AI Assistants,AI recruiting agent for sourcing and outreach.,Paid,"ai-agent,sourcing",pricing not public,icons/noon.png
+Pin,https://www.pin.com,Sourcing & Data,"AI recruiting platform: 850M+ profiles, outreach, scheduling.",Freemium,"sourcing,ai-search,outreach",,icons/pin.png
+HubSpot,https://www.hubspot.com,ATS & CRM,CRM pipelines for candidates and clients.,Freemium,"crm,pipeline",,icons/hubspot.png
+Recruiterflow,https://www.recruiterflow.com,ATS & CRM,Recruiting CRM + ATS built for agencies and teams.,Freemium,"ats,crm,agency",,icons/recruiterflow.png
+Dripify,https://www.dripify.io,Sourcing & Data,LinkedIn automation with drip campaigns and sequences.,Freemium,"linkedin,automation,outreach",,icons/dripify.png
+HeyReach,https://www.heyreach.io,Sourcing & Data,LinkedIn outreach automation with a unified inbox.,Freemium,"linkedin,automation,outreach",,icons/heyreach.png
+Hunter.io,https://hunter.io,Sourcing & Data,Find and verify professional email addresses.,Freemium,"email-finder,verification,outreach",,icons/hunterio.png

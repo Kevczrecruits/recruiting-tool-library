@@ -9,6 +9,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<script src="icons/icons-1.js"></script>
+<script src="icons/icons-2.js"></script>
+<script src="icons/icons-3.js"></script>
 <style>
   :root{
     --ink:#0B0F19;
@@ -328,6 +331,12 @@ function toCSV(list){
 }
 
 function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function iconSrc(t){
+  var p=String(t.icon||"");
+  var slug=p.split("/").pop().replace(/\.png$/i,"");
+  if(window.ICONS&&ICONS[slug])return ICONS[slug];
+  return p;
+}
 
 function filtered(){
   const q=query.toLowerCase();
@@ -347,7 +356,7 @@ function render(){
     grid.innerHTML=list.map(t=>`
       <article class="card">
         <div class="chead">
-          ${t.icon?`<img class="ticon" src="${esc(t.icon)}" alt="${esc(t.name)} logo" loading="lazy" onerror="this.style.display='none'"/>`:''}
+          ${(()=>{const s=iconSrc(t);return s?`<img class="ticon" src="${s}" alt="${esc(t.name)} logo" loading="lazy" onerror="this.style.display='none'"/>`:``;})()}
           <div>
             <div class="catline">${esc(t.category)}</div>
             <h2>${esc(t.name)}</h2>

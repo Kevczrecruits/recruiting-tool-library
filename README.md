@@ -12,7 +12,8 @@ keep one organized, shareable home for tools worth remembering (chatgpt, claude,
 |---|---|
 | `index.html` | the tracker ui — glassmorphism cards, live search, category filters, an add-tool helper that generates csv rows, and a one-click csv export |
 | `tools.csv` | **source of truth** — one row per tool: `name,url,category,description,cost,tags,notes,icon` |
-| `icons/` | one official logo per tool (`icons/<slug>.png`, e.g. `icons/granola.png`) — rendered on each card at 52px |
+| `icons/` | one official logo per tool — the canonical files are `icons/<slug>.png` (e.g. `icons/granola.png`), kept locally |
+| `icons/icons-N.js` | the same logos embedded as base64 data URIs, loaded by the page (see note below) — rendered on each card at 52px |
 | `README.md` | this file — goal, history, and handoff notes |
 
 to view the tracker: open `index.html` in a browser, or serve the folder / enable github pages. served over http(s) the page reads `tools.csv` live; opened from `file://` it falls back to the embedded `TOOL_DATA` copy.
@@ -27,7 +28,9 @@ to view the tracker: open `index.html` in a browser, or serve the folder / enabl
 
 ## how to add a tool
 
-1. append one row to `tools.csv`, keeping the header order (`name,url,category,description,cost,tags,notes,icon`). quote any field that contains a comma. drop the tool's official logo into `icons/` as `icons/<slug>.png` (lowercase name, letters/numbers only — the add-tool form suggests this automatically) and put that path in the `icon` column. icons must be the tool's real published logo pulled from its official site — never invented.
+1. append one row to `tools.csv`, keeping the header order (`name,url,category,description,cost,tags,notes,icon`). quote any field that contains a comma. drop the tool's official logo into `icons/` as `icons/<slug>.png` (lowercase name, letters/numbers only — the add-tool form suggests this automatically) and put that path in the `icon` column.
+
+**icon plumbing note:** the GitHub file API used for pushes cannot transport binary PNGs, so the repo carries the logos as base64 data URIs in `icons/icons-N.js` (each file stays under ~100KB for the push transport). `index.html` loads those scripts and resolves each tool's `icon` path to its data URI by slug; if no embedded icon matches, it falls back to the path itself. to add a logo for a new tool: save the official PNG locally as `icons/<slug>.png`, then append `"<slug>": "data:image/png;base64,..."` to the smallest `icons-N.js` (or ask an agent to regenerate them). icons must be the tool's real published logo pulled from its official site — never invented.
 2. refresh `index.html` — when served over http(s) it picks the csv up automatically.
 3. if you used the ui's **+ add tool** form, paste the generated row into `tools.csv` so the source stays complete (the form also offers a full-csv export).
 4. when opening from `file://`, also update the embedded `TOOL_DATA` array in `index.html` to match.

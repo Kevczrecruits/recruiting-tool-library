@@ -395,7 +395,7 @@ function render(){
         </div>
       </article>`).join("");
   }
-  const cats=[...new Set(tools.map(t=>t.category))];
+  const cats=[...new Set(tools.map(t=>t.category))].sort((a,b)=>a.localeCompare(b));
   document.getElementById("mTools").textContent=tools.length;
   document.getElementById("mCats").textContent=cats.length;
   document.getElementById("mFree").textContent=tools.filter(t=>/free/i.test(t.cost)).length;

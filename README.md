@@ -21,7 +21,7 @@ to view the tracker: open `index.html` in a browser, or serve the folder / enabl
 ## work done so far (oct 4, 2026)
 
 - built locally at `~/workspace/recruiting-tool-library/` — `index.html`, `tools.csv` (source of truth), and this readme
-- seeded with **49 tools** across **9 categories**: ai assistants, research & notebooks, design & decks, pdf & docs, sourcing & data, productivity, build & host, automation, ats & crm
+- seeded with **49 tools** across **11 categories**: ai assistants, research & notebooks, design & decks, pdf & docs, sourcing & data, productivity, build & host, automation, ats & crm, comp data, funding intel
 - github push **pending, not done**: repo creation is blocked (github app lacks repo-create permission, 403 — same limitation as the sep 28 childcare repo). kevin needs to create the empty `recruiting-tool-library` repo himself and grant the muse app access, then the files can be pushed.
 - seed list: chatgpt, claude, gemini, notebooklm, canva, gamma, figma, smallpdf, clay, crust data, linkedin, github, notion, granola, v0, vercel, perplexity, google scholar, obsidian, otter.ai, wispr flow, fathom, google calendar, n8n, zapier, hermes agent, openclaw, qdrant, apollo, metaview, juicebox, ashby, noon, pin, hubspot, recruiterflow, dripify, heyreach, hunter.io, levels.fyi, glassdoor, pave, carta, h1b data, blind, ravio, crunchbase, layoffs.fyi, wellfound
 - tracker ui built in the "gen x softclub glassmorphism" style: soft light gradient + faint grid mesh, frosted-glass cards, obsidian-navy pills, electric-cyan status dots, space grotesk / space mono type
@@ -40,7 +40,7 @@ to view the tracker: open `index.html` in a browser, or serve the folder / enabl
 another agent picking this up should:
 
 1. read `tools.csv` first — it is the source of truth. do not trust the embedded `TOOL_DATA` copy alone; it can lag.
-2. keep `category` values consistent with the existing seven (`AI Assistants`, `Research & Notebooks`, `Design & Decks`, `PDF & Docs`, `Sourcing & Data`, `Productivity`, `Build & Host`, `Automation`, `ATS & CRM`). add a new category only deliberately — the ui builds its filter pills from whatever categories exist.
+2. keep `category` values consistent with the existing seven (`AI Assistants`, `Research & Notebooks`, `Design & Decks`, `PDF & Docs`, `Sourcing & Data`, `Productivity`, `Build & Host`, `Automation`, `ATS & CRM`, `Comp Data`, `Funding Intel`). add a new category only deliberately — the ui builds its filter pills from whatever categories exist.
 3. keep `description` to one terse, use-case-first line.
 4. `cost` is one of: `Free`, `Freemium`, `Paid`.
 5. `tags` are comma-separated, lowercase, no spaces after commas.

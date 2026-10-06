@@ -38,13 +38,13 @@ Recruiterflow,https://www.recruiterflow.com,ATS & CRM,Recruiting CRM + ATS built
 Dripify,https://www.dripify.io,Sourcing & Data,LinkedIn automation with drip campaigns and sequences.,Paid,"linkedin,automation,outreach",,icons/dripify.png
 HeyReach,https://www.heyreach.io,Sourcing & Data,LinkedIn outreach automation with a unified inbox.,Paid,"linkedin,automation,outreach",,icons/heyreach.png
 Hunter.io,https://hunter.io,Sourcing & Data,Find and verify professional email addresses.,Freemium,"email-finder,verification,outreach",,icons/hunterio.png
-Levels.fyi,https://www.levels.fyi,Sourcing & Data,"Tech salary and comp data by level, role, and company.",Freemium,"salary,compensation,data",,icons/levelsfyi.png
-Glassdoor,https://www.glassdoor.com,Sourcing & Data,"Company reviews, salaries, and interview intel.",Freemium,"reviews,salaries,company-intel",,icons/glassdoor.png
-Pave,https://www.pave.com,Sourcing & Data,Real-time startup comp bands from actual payroll data.,Freemium,"salary,compensation,startups",,icons/pave.png
-Carta,https://carta.com,Sourcing & Data,Startup comp and equity benchmarks from real cap tables.,Freemium,"salary,equity,compensation",,icons/carta.png
-H1B Data,https://h1bdata.info,Sourcing & Data,Public H1B filings with exact salaries by role and company.,Free,"salary,h1b,data",,
-Blind,https://www.teamblind.com,Sourcing & Data,Anonymous tech comp discussions; unverified but often accurate.,Free,"salary,community,comp",,icons/blind.png
-Ravio,https://www.ravio.com,Sourcing & Data,EU-first comp benchmarking with free salary guides.,Freemium,"salary,compensation,eu",,icons/ravio.png
-Crunchbase,https://www.crunchbase.com,Sourcing & Data,"Funding rounds, investors, and company intel; the standard.",Freemium,"funding,investors,company-intel",,icons/crunchbase.png
-Layoffs.fyi,https://layoffs.fyi,Sourcing & Data,Layoff tracker; spot available talent in real time.,Free,"layoffs,talent-availability",,icons/layoffsfyi.png
-Wellfound,https://wellfound.com,Sourcing & Data,Startup jobs and funding signals in one place.,Free,"startups,jobs,funding",,icons/wellfound.png
+Levels.fyi,https://www.levels.fyi,Comp Data,"Tech salary and comp data by level, role, and company.",Freemium,"salary,compensation,data",,icons/levelsfyi.png
+Glassdoor,https://www.glassdoor.com,Comp Data,"Company reviews, salaries, and interview intel.",Freemium,"reviews,salaries,company-intel",,icons/glassdoor.png
+Pave,https://www.pave.com,Comp Data,Real-time startup comp bands from actual payroll data.,Freemium,"salary,compensation,startups",,icons/pave.png
+Carta,https://carta.com,Comp Data,Startup comp and equity benchmarks from real cap tables.,Freemium,"salary,equity,compensation",,icons/carta.png
+H1B Data,https://h1bdata.info,Comp Data,Public H1B filings with exact salaries by role and company.,Free,"salary,h1b,data",,
+Blind,https://www.teamblind.com,Comp Data,Anonymous tech comp discussions; unverified but often accurate.,Free,"salary,community,comp",,icons/blind.png
+Ravio,https://www.ravio.com,Comp Data,EU-first comp benchmarking with free salary guides.,Freemium,"salary,compensation,eu",,icons/ravio.png
+Crunchbase,https://www.crunchbase.com,Funding Intel,"Funding rounds, investors, and company intel; the standard.",Freemium,"funding,investors,company-intel",,icons/crunchbase.png
+Layoffs.fyi,https://layoffs.fyi,Funding Intel,Layoff tracker; spot available talent in real time.,Free,"layoffs,talent-availability",,icons/layoffsfyi.png
+Wellfound,https://wellfound.com,Funding Intel,Startup jobs and funding signals in one place.,Free,"startups,jobs,funding",,icons/wellfound.png
